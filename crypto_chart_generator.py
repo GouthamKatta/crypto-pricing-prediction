@@ -72,3 +72,4 @@ def plot_price_volume_chart(file_path):
 # Loop through each file and generate/save its chart
 for file_path in file_paths:
     plot_price_volume_chart(file_path)
+ 

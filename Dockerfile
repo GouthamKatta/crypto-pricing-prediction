@@ -15,3 +15,4 @@ EXPOSE 5003
 
 # Command to run the application
 CMD ["python", "api.py"]
+ 
