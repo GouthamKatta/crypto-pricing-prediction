@@ -1,0 +1,44 @@
+import requests
+import pandas as pd
+
+# Defining API Key
+API_KEY = "II8A29RF39QPP4B8"
+
+# Function to fetch historical crypto data for multiple symbols
+def fetch_cryptodata(symbols, market="USD"):
+    base_url = "https://www.alphavantage.co/query"
+
+    for symbol in symbols:
+        print(f"Fetching data for {symbol} in {market} market...")
+        
+        params = {
+            "function": "DIGITAL_CURRENCY_DAILY",
+            "symbol": symbol,
+            "market": market,
+            "apikey": API_KEY
+        }
+
+        response = requests.get(base_url, params=params)
+        data = response.json()
+
+        if f"Time Series (Digital Currency Daily)" in data:
+            df = pd.DataFrame.from_dict(data[f"Time Series (Digital Currency Daily)"], orient="index")
+            df = df.rename(columns={
+                "1a. open (USD)": "Open",
+                "2a. high (USD)": "High",
+                "3a. low (USD)": "Low",
+                "4a. close (USD)": "Close",
+                "5. volume": "Volume",
+                "6. market cap (USD)": "Market Cap"
+            })
+            df.index = pd.to_datetime(df.index)
+            df = df.sort_index()
+            df.to_csv(f"{symbol}_historical_data.csv")  # Save as CSV
+            print(f"Data saved to {symbol}_historical_data.csv")
+        else:
+            print(f"Error fetching data for {symbol}: {data}")
+
+# Example Usage
+if __name__ == "__main__":
+    crypto_symbols = ["BTC", "ETH", "DOGE"]  # List of cryptos to fetch
+    fetch_cryptodata(crypto_symbols, market="USD")
