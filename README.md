@@ -71,7 +71,7 @@ docker run -p 5003:5003 crypto-api
 
 ## Author
 **Goutham Katta**  
-Submission for Condor AI Assignment – Internal PoC
+Done for Fun
 
 ## License
 You can use this however you want, just keep my name on it, and don’t sue me if it blows up. 
