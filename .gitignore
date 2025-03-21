@@ -1,0 +1,15 @@
+# Virtual environment
+venv/
+
+# System files
+.DS_Store
+
+# Compiled files
+__pycache__/
+*.pyc
+
+# Model artifacts and data
+*.joblib
+*.csv
+*.png
+models/
